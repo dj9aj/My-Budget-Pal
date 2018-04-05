@@ -9,7 +9,7 @@ const port                  = 3000,
     //   morgan                = require("morgan"),
       User                  = require("./models/user"),
       Receipt               = require("./models/receipt"),
-      accounts              = require("./lib/accounts");
+      budgetCtrl            = require("./lib/budgetCtrl");
       
 //Requiring Routes
 const indexRoutes           = require("./routes/index"),

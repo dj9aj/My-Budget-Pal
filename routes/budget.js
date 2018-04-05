@@ -3,12 +3,12 @@ const express     = require("express"),
       passport    = require("passport"),
       User        = require("../models/user"),
       Receipt     = require("../models/receipt"),
-      accounts    = require("../lib/accounts");    
+      budgetCtrl  = require("../lib/budgetCtrl"),
+      middleware  = require("../middleware/index");  
 
 
-router.get("/budget/:username", function(req, res, next) {
+router.get("/budget/:username", middleware.isLoggedIn, middleware.checkBudgetOwnership, function(req, res, next) {
     User.findOne({username: req.params.username}, function (err, foundUser) {
-        // console.log(foundUser);
         if(err) {
             console.log(err);
             res.redirect("/");
@@ -18,10 +18,12 @@ router.get("/budget/:username", function(req, res, next) {
                 console.log(err);
                 res.redirect("/");
             }
-            // console.log(receipts);
-            console.log(accounts.fetchData(foundUser.username));
-            // console.log(great);
-            res.render("budget/show", {user: foundUser, receipts: receipts});
+            
+            const budgetTotals = budgetCtrl.calculateTotals(receipts);
+            const expPercentage = budgetCtrl.calculatePercentage(budgetTotals.totalInc, budgetTotals.totalExp);
+            const icons = budgetCtrl.displayCategory();
+            
+            res.render("budget/show", {user: foundUser, receipts: receipts, budgetTotals: budgetTotals, expPercentage, icons: icons});
         }); 
     });
 });
