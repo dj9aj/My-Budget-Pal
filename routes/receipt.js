@@ -3,9 +3,11 @@ const express       = require("express"),
       passport      = require("passport"),
       User          = require("../models/user"),
       Receipt       = require("../models/receipt"),
+      budgetCtrl    = require("../lib/budgetCtrl"),
       middleware    = require("../middleware/index");  
 
-      
+
+// Create a new receipt   
 router.post("/budget/:username", function (req, res, next) {
     const author = {
         id: req.user._id,
@@ -16,6 +18,7 @@ router.post("/budget/:username", function (req, res, next) {
         if (err) {
             console.log(err);
         } else {
+            console.log(newlyCreated);
             res.redirect("/budget/" + req.params.username);
         }
     });
@@ -26,9 +29,12 @@ router.get("/budget/:username/:receipt_id/edit", middleware.checkReceiptOwnershi
     Receipt.findById(req.params.receipt_id, function (err, foundReceipt) {
         if (err) {
             console.log(err);
-        } else {
-            res.render("receipts/edit", {receipt: foundReceipt});
+            res.redirect("/budget/" + req.params.username);
         }
+        
+        const icons = budgetCtrl.displayCategory();
+    
+        res.render("receipts/edit", {receipt: foundReceipt, icons: icons});
     });
 });
 

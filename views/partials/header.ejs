@@ -4,36 +4,22 @@
         <!-- Make site responsive on mobile/tablet -->
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>My Budget Pal</title>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,600" rel="stylesheet" type="text/css">
         <link href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css">
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-        <link  rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/components/button.min.css">
-        
         <link rel="stylesheet" href="/stylesheets/app.css">
     </head>
     <body>
-        <nav class="navbar transparent">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="/">MyBudgetPal</a>
-                </div>
-                <div id="navbar" class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav">
-                    <li><a href="">Home</a></li>
-                    </ul>
-                    <ul class="nav navbar-nav navbar-right">         
-                        <li><a href="/logout">Logout</a></li>
-                    </ul>
-                </div>
-            </div>
-         </nav>
+
+        <header>
+            <h2 class="logo"><a href="/budget/<%=currentUser.username%>">My Budget Pal</a></h2>
+            <span id="logo"><img src="/stylesheets/piggy_bank.png" height="30" width="30"></span>
+            <nav>
+                <li><a href="/logout">Logout</a></li>
+            </nav>
+        </header>
+       
+
        
 
    

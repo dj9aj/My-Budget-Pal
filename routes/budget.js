@@ -23,7 +23,7 @@ router.get("/budget/:username", middleware.isLoggedIn, middleware.checkBudgetOwn
             const expPercentage = budgetCtrl.calculatePercentage(budgetTotals.totalInc, budgetTotals.totalExp);
             const icons = budgetCtrl.displayCategory();
             
-            res.render("budget/show", {user: foundUser, receipts: receipts, budgetTotals: budgetTotals, expPercentage, icons: icons});
+            res.render("budget/show", {user: foundUser, receipts: receipts, budgetTotals: budgetTotals, expPercentage: expPercentage, icons: icons});
         }); 
     });
 });

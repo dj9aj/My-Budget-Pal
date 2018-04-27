@@ -48,6 +48,7 @@ app.use(express.static(__dirname + "/public")); //Connect our stylesheets and ap
 app.use(methodOverride("_method"));
 app.locals.moment = require("moment"); //moment is available for use in all of the view files via the variable named 'moment'
 
+
 // Use route files
 app.use(indexRoutes);
 app.use(budgetRoutes);

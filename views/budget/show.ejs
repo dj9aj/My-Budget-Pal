@@ -31,101 +31,86 @@
 
 
 <div class="bottom">
-    
-
-<div class="receipt_container clearfix">
-    <div class="expenses">
-            <div class="add">
-                    <div class="add_receipt">
-                        <form action="/budget/<%= currentUser.username %>" method="POST">
-                            <select class="add_type" name="type">
-                                <option value="inc">Income</option>
-                                <option value="exp">Expense</option>
-                            </select>
-                            <select class="add_category" name="category">
-                                <optgroup label="Expenses">
-                                    <option value="transport">Transport</option>
-                                    <option value="groceries">Groceries</option>
-                                    <option value="eating_out">Eating Out</option>
-                                    <option value="bills">Bills</option>
-                                    <option value="entertainment">Entertainment</option>
-                                    <option value="holidays">Holidays</option>
-                                    <option value="shopping">Shopping</option>
-                                    <option value="savings">Savings</option>
-                                    <option value="expenses">Expenses</option>
-                                    <option value="general">General</option>
-                                </optgroup>
-                                <optgroup label="Income">
-                                    <option value="wages">Wages</option>
-                                    <option value="refund">Refund</option>
-                                    <option value="cashback">Cash Back</option>
-                                    <option value="gift">Gift</option>
-                                    <option value="general">General</option>
-                                </optgroup>
-                                
-                            </select>
-                            <input type="text" class="add__description" name="description" placeholder="Add description">
-                            <input type="number" class="add__value" name="value" placeholder="Value" min="0.01" step="0.01">
-                            <button class="add__btn"><i class="ion-ios-checkmark-outline"></i></button>  
-                        </form>
-                    </div>  
-                </div>    
+    <div class="receipt_container clearfix">
+        <div class="add_receipt">
+            <span class="receipt_title">Add Receipt</span>
+            <hr>
+            <form action="/budget/<%= currentUser.username %>" method="POST">
+                <select class="add_type" name="type" required>
+                    <option value="" selected disabled hidden>Type</option>
+                    <option value="inc">Income</option>
+                    <option value="exp">Expense</option>
+                </select>
+                <select class="add_category" name="category" required>
+                    <option value="" selected disabled hidden>Category</option>
+                    <optgroup label="Expenses">
+                        <option value="transport">Transport</option>
+                        <option value="groceries">Groceries</option>
+                        <option value="eating_out">Eating Out</option>
+                        <option value="bills">Bills</option>
+                        <option value="entertainment">Entertainment</option>
+                        <option value="holidays">Holidays</option>
+                        <option value="shopping">Shopping</option>
+                        <option value="savings">Savings</option>
+                        <option value="expenses">Expenses</option>
+                        <option value="general">General</option>
+                    </optgroup>
+                    <optgroup label="Income">
+                        <option value="wages">Wages</option>
+                        <option value="refund">Refund</option>
+                        <option value="cashback">Cash Back</option>
+                        <option value="gift">Gift</option>
+                        <option value="general">General</option>
+                    </optgroup>
+                </select>
+                <input type="text" class="add__description" name="description" placeholder="Description" required>
+                <input type="number" class="add__value" name="value" placeholder="Value" min="0.01" step="0.01" required>
+                <button class="add__btn"><i class="ion-ios-plus-outline"></i></button>  
+            </form>
+        </div>  
+                    
         
-        <div class="expenses__list">
+        <div class="receipts__list">
             <% for (var i = receipts.length - 1; i >= 0; i--) { %>
-                <% if (receipts[i].receipt_type == "exp") { %>
-                <div class="item clearfix" id="expense-0">
-                    <table>
-                        <tbody>
-                            <tr>
-                                <td class="category_td"><img src="/stylesheets/<%= icons[receipts[i].category] %>" height="42" width="42"</td>
-                                <td class="exp_description_td"><%= receipts[i].description %></td>
-                                <td class="time_td"><i><%= moment(receipts[i].createdAt).fromNow() %></i></td>
+            <div class="item clearfix">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td class="category_td"><img src="/stylesheets/<%= icons[receipts[i].category] %>" height="42" width="42"</td>
+                            <td class="exp_description_td"><%= receipts[i].description %></td>
+                            <td class="time_td"><i><%= moment(receipts[i].createdAt).format("Do MMM YYYY, h:mm a") %></i></td>
+                            <% if (receipts[i].receipt_type == "exp") { %>
                                 <td class="exp_value_td">- £ <%= receipts[i].value.toLocaleString("en-IN", {minimumFractionDigits: 2, maximumFractionDigits: 2}); %></td>
                                 <td>
                                     <form action="/budget/<%=user.username%>/<%=receipts[i]._id%>/edit" method="GET">
-                                        <button class="ui button">Edit</button>
+                                        <button class="exp__edit--btn"><i class="ion-edit"></i></button>
                                     </form>
                                 </td>
                                 <td class="delete_td">
                                     <form action="/budget/<%=currentUser.username%>/<%=receipts[i]._id%>?_method=DELETE" method="POST">
-                                        <button class="ui button">Remove</button>
+                                        <button class="exp__delete--btn"><i class="ion-ios-trash-outline"></i></button>
                                     </form>
                                 </td>
-                            </tr>
-                        </tbody>
-                    </table>    
-                    
-                </div>
-            <% } else { %>   
-                <div class="item clearfix" id="expense-0">
-                        <table>
-                            <tbody>
-                                <tr>
-                                    <td class="category_td"><img src="/stylesheets/<%= icons[receipts[i].category] %>" height="42" width="42"</td>
-                                    <td class="inc_description_td"><%= receipts[i].description %></td>
-                                    <td class="time_td"><i><%= moment(receipts[i].createdAt).fromNow() %></i></td>
-                                    <td class="inc_value_td">+ £<%= receipts[i].value.toLocaleString("en-IN", {minimumFractionDigits: 2, maximumFractionDigits: 2}); %></td>
-                                    <td>
-                                        <form action="/budget/<%=user.username%>/<%=receipts[i]._id%>/edit" method="GET">
-                                            <button class="ui button">Edit</button>
-                                        </form>
-                                    </td>
-                                    <td class="delete_td">
-                                        <form action="/budget/<%=currentUser.username%>/<%=receipts[i]._id%>?_method=DELETE" method="POST">
-                                            <button class="ui button">Remove</button>
-                                        </form>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>    
-                    </div>
-                   <% } %> 
+                            <% } else { %>  
+                                <td class="inc_value_td">+ £<%= receipts[i].value.toLocaleString("en-IN", {minimumFractionDigits: 2, maximumFractionDigits: 2}); %></td>
+                                <td>
+                                    <form action="/budget/<%=user.username%>/<%=receipts[i]._id%>/edit" method="GET">
+                                        <button class="inc__edit--btn"><i class="ion-edit"></i></button>
+                                    </form>
+                                </td>
+                                <td class="delete_td">
+                                    <form action="/budget/<%=currentUser.username%>/<%=receipts[i]._id%>?_method=DELETE" method="POST">
+                                        <button class="inc__delete--btn"><i class="ion-ios-trash-outline"></i></button>
+                                    </form>
+                                </td>
+                            <% } %> 
+                        </tr>
+                    </tbody>
+                </table>    
+            </div>
             <% } %>
         </div>
     </div>
 </div>
-
-
 
 <% include ../partials/footer %>

@@ -3,30 +3,131 @@
 <div class="top">
     <div class="budget">
         <div class="budget_title">
-            Hello <%= user.username %>,  available budget on <%= moment().format("Do MMM YYYY"); %>:
+            Edit Receipt - "<%= receipt.description %>"
         </div>
+    </div> 
+</div>
 
-        <div class="budget__value">£<%=budgetTotals.totalBudget.toLocaleString("en-IN", {minimumFractionDigits: 2, maximumFractionDigits: 2});%></div>
-
-        <div class="budget__income clearfix">
-            <div class="budget__income--text">Income</div>
-            <div class="right">
-                <div class="budget__income--value">+ £<%=budgetTotals.totalInc.toLocaleString("en-IN", {minimumFractionDigits: 2, maximumFractionDigits: 2});%></div>
-                <div class="budget__income--percentage">&nbsp;</div>
+<div class="bottom">
+    <div class="receipt_container clearfix">
+        <div class="add_receipt">
+            <form action="/budget/<%=currentUser.username%>/<%=receipt._id%>?_method=PUT" method="POST">
+                <select class="add_type" name="type" required>
+                    <% if (receipt.receipt_type === "exp") { %>
+                        <option value="inc">Income</option>
+                        <option value="exp" selected>Expense</option>
+                   <% } else { %>
+                        <option value="inc" selected>Income</option>
+                        <option value="exp">Expense</option>
+                    <% } %>
+                </select>
+                <select class="add_category" name="category" required>
+                    <optgroup label="Expenses">
+                        <% if (receipt.category === "transport") { %>
+                            <option value="transport" selected>Transport</option>
+                        <% } %>
+                        <% if (receipt.category === "groceries") { %>
+                            <option value="groceries" selected>Groceries</option>
+                        <% } %>
+                        <% if (receipt.category === "eating_out") { %>
+                            <option value="eating_out" selected>Eating Out</option>
+                        <% } %>
+                        <% if (receipt.category === "bills") { %>
+                            <option value="bills" selected>Bills</option>
+                        <% } %>
+                        <% if (receipt.category === "entertainment") { %>
+                            <option value="entertainment" selected>Entertainment</option>
+                        <% } %>
+                        <% if (receipt.category === "holidays") { %>
+                            <option value="holidays" selected>Holidays</option>
+                        <% } %>
+                        <% if (receipt.category === "shopping") { %>
+                            <option value="shopping" selected>Shopping</option>
+                        <% } %>
+                        <% if (receipt.category === "savings") { %>
+                            <option value="savings" selected>Savings</option>
+                        <% } %>
+                        <% if (receipt.category === "expenses") { %>
+                            <option value="expenses" selected>Expenses</option>
+                        <% } %>
+                        <% if (receipt.category === "general") { %>
+                            <option value="general" selected>General</option>
+                        <% } %>
+                    </optgroup>
+                    <optgroup label="Income">
+                        <% if (receipt.category === "wages") { %>
+                            <option value="wages" selected>Wages</option>
+                        <% } %>
+                        <% if (receipt.category === "refund") { %>
+                            <option value="refund" selected>Refund</option>
+                        <% } %>
+                        <% if (receipt.category === "cashback") { %>
+                            <option value="cashback" selected>Cash Back</option>
+                        <% } %>
+                        <% if (receipt.category === "gift") { %>
+                            <option value="gift" selected>Gift</option>
+                        <% } %>  
+                        <% if (receipt.category === "general") { %>
+                            <option value="general" selected>General</option>
+                        <% } %> 
+                    </optgroup>
+                </select>
+                <input type="text" class="add__description" name="description" value="<%= receipt.description %>" required>
+                <input type="number" class="add__value" name="value" value="<%= receipt.value %>" min="0.01" step="0.01" required>
+                <button class="add__btn"><i class="ion-ios-plus-outline"></i></button>  
+            </form>
+        </div>  
+                    
+        <div class="receipts__list">
+            <div class="item clearfix">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td class="category_td"><img src="/stylesheets/<%= icons[receipt.category] %>" height="42" width="42"</td>
+                            <td class="exp_description_td"><%= receipt.description %></td>
+                            <td class="time_td"><i><%= moment(receipt.createdAt).fromNow() %></i></td>
+                            <% if (receipt.receipt_type === "exp") { %>
+                            <td class="exp_edit_value_td">- £ <%= receipt.value.toLocaleString("en-IN", {minimumFractionDigits: 2, maximumFractionDigits: 2}); %></td>   
+                            <% } else { %>
+                            <td class="inc_edit_value_td">+ £<%= receipt.value.toLocaleString("en-IN", {minimumFractionDigits: 2, maximumFractionDigits: 2}); %></td>
+                            <% } %>
+                        </tr>
+                    </tbody>
+                </table>    
             </div>
-        </div>
-
-        <div class="budget__expenses clearfix">
-            <div class="budget__expenses--text">Expenses</div>
-            <div class="right clearfix">
-                <div class="budget__expenses--value">- £<%=budgetTotals.totalExp.toLocaleString("en-IN", {minimumFractionDigits: 2, maximumFractionDigits: 2});%></div>
-                <div class="budget__expenses--percentage"><%=expPercentage %>%</div>
-            </div>
-        </div> 
+        </div>      
     </div>
 </div>
     
-<div class="bottom">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="bottom">
     <div class="receipt_container clearfix">
         <div class"expenses">
             <div class="add">
@@ -65,7 +166,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 
 
 
