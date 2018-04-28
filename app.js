@@ -17,8 +17,8 @@ const indexRoutes           = require("./routes/index"),
       receiptRoutes         = require("./routes/receipt");
 
 
-mongoose.connect("mongodb://localhost/my_budget_app_v1"); //Connect to the database
-
+// mongoose.connect("mongodb://localhost/my_budget_app_v1"); //Connect to the database
+mongoose.connect("mongodb://jack:budget@ds261929.mlab.com:61929/mybudgetpal");
 
 app.use(bodyParser.urlencoded({extended: true})); //Pass the body of incoming requests 
 app.set("view engine", "ejs"); //Set EJS as view engine for app
