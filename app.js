@@ -1,4 +1,5 @@
-const express               = require("express"),
+const port                  = process.env.PORT || 3000,
+      express               = require("express"),
       app                   = express(),
       bodyParser            = require("body-parser"),
       mongoose              = require("mongoose"),
@@ -57,9 +58,7 @@ app.use(indexRoutes);
 app.use(budgetRoutes);
 app.use(receiptRoutes);
 
-// app.listen(port);
-app.listen(process.env.port, function() {
-    "My Budget Pal server has started!"
-});
+app.listen(port);
+
 
 // console.log('Server running at http://localhost:' + port);
