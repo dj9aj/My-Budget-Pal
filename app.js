@@ -58,6 +58,9 @@ app.use(indexRoutes);
 app.use(budgetRoutes);
 app.use(receiptRoutes);
 
-app.listen(port);
+// app.listen(port);
+app.listen(process.env.port, function() {
+
+});
 
 console.log('Server running at http://localhost:' + port);
