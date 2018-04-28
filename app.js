@@ -60,7 +60,7 @@ app.use(receiptRoutes);
 
 // app.listen(port);
 app.listen(process.env.port, function() {
-
+    "My Budget Pal server has started!"
 });
 
-console.log('Server running at http://localhost:' + port);
+// console.log('Server running at http://localhost:' + port);
