@@ -19,6 +19,7 @@ router.post("/budget/:username", function (req, res, next) {
             console.log(err);
         } else {
             console.log(newlyCreated);
+            req.flash("success", "Receipt Added!");
             res.redirect("/budget/" + req.params.username);
         }
     });
@@ -42,10 +43,11 @@ router.get("/budget/:username/:receipt_id/edit", middleware.checkReceiptOwnershi
 router.put("/budget/:username/:receipt_id", function (req, res, next) {
     var receipt = {receipt_type: req.body.type, category: req.body.category, description: req.body.description, value: req.body.value};
     Receipt.findByIdAndUpdate(req.params.receipt_id, receipt, {upsert: true, new: true}, function (err, updatedReceipt) {
-        console.log(updatedReceipt);
         if (err) {
+            req.flash("error", err.message);
             res.redirect("back");
         } else {
+            req.flash("success", "Receipt Updated!");
             res.redirect("/budget/" + req.params.username);
         }
     });
@@ -57,6 +59,7 @@ router.delete("/budget/:username/:receipt_id", function (req, res, next) {
         if (err) {
             res.redirect("back");
         } else {
+            req.flash("success", "Receipt Deleted!");
             res.redirect("/budget/" + req.params.username);
         }
     });

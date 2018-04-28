@@ -7,21 +7,21 @@ const express     = require("express"),
       middleware  = require("../middleware/index");  
 
 
-router.get("/budget/:username", middleware.isLoggedIn, middleware.checkBudgetOwnership, function(req, res, next) {
+router.get("/budget/:username", middleware.isLoggedIn, middleware.checkBudgetOwnership, (req, res, next) => {
     User.findOne({username: req.params.username}, function (err, foundUser) {
         if(err) {
             console.log(err);
             res.redirect("/");
         }
-        Receipt.find().where("author.username").equals(foundUser.username).exec(function(err, receipts) {
+        Receipt.find().where("author.username").equals(foundUser.username).exec((err, receipts) => {
+            let budgetTotals, expPercentage, icons;  
             if(err) {
                 console.log(err);
                 res.redirect("/");
             }
-            
-            const budgetTotals = budgetCtrl.calculateTotals(receipts);
-            const expPercentage = budgetCtrl.calculatePercentage(budgetTotals.totalInc, budgetTotals.totalExp);
-            const icons = budgetCtrl.displayCategory();
+            budgetTotals = budgetCtrl.calculateTotals(receipts);
+            expPercentage = budgetCtrl.calculatePercentage(budgetTotals.totalInc, budgetTotals.totalExp);
+            icons = budgetCtrl.displayCategory();
             
             res.render("budget/show", {user: foundUser, receipts: receipts, budgetTotals: budgetTotals, expPercentage: expPercentage, icons: icons});
         }); 

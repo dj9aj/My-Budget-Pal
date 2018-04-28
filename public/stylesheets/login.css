@@ -31,19 +31,6 @@ body {
 }
 
 
-.login {
-    position: absolute;
-     margin: auto;
-     top: 0;
-     right: 0;
-     bottom: 0;
-     left: 0;
-     width: 500px;
-     height: 100px;
-      
-    
-}
-
 .title {
     position: absolute;
     margin: auto;
@@ -54,8 +41,21 @@ body {
     height: 500px;
     padding-top: 100px;
     padding-bottom: 500px;
-    text-align: center;  
+    text-align: center;
 }
+
+
+.login {
+    position: absolute;
+    margin: auto;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 500px;
+    height: 100px;
+}
+
 
 h1 {
     letter-spacing: 2px;                 
@@ -64,9 +64,11 @@ h1 {
     font-weight: 200;
 }
 
+
 #logo {
     opacity: 0.8;
 }
+
 
 .login_title,
 .password_title {
@@ -77,6 +79,7 @@ h1 {
     text-align: left;
     
 }
+
 
 .username,
 .password {
@@ -94,12 +97,14 @@ h1 {
     width: 200px;
 }
 
+
 .username:focus,
 .password:focus {
     outline: none;
     border: 1px solid rgba(255, 255, 255, 0.2);
     background-color: rgba(255,255,255, 0.2);
 }
+
 
 .login_button {
     font-size: 40px;
@@ -114,9 +119,11 @@ h1 {
     margin-left: 10px;
 }
 
+
 .register_link {
     padding-top: 20px;
 }
+
 
 a {
     text-decoration: none !important;
@@ -131,4 +138,28 @@ a {
 
 a:hover {
     opacity: 0.75;
+}
+
+.message {
+    font-size: 15px;
+    color: #fff;
+    font-weight: 100;
+    opacity: 1;
+    letter-spacing: 1px;
+    padding-top: 20px
+}
+
+@-webkit-keyframes fadeout {
+    0% {opacity:1;}
+    100% {opacity:0;}
+}
+@keyframes fadeout {
+    0% {opacity:1;}
+    100% {opacity:0;}
+}
+.fadeOut {
+  opacity:0;
+  -moz-animation   : fadeout 3s linear;
+  -webkit-animation: fadeout 3s linear;
+  animation        : fadeout 3s linear;
 }

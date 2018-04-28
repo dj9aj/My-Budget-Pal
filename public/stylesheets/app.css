@@ -31,11 +31,13 @@ body {
 
 .right { float: right; }
 
+
 /* Header */
 
 nav {
     list-style: none;
 }
+
 
 a {
     text-decoration: none !important;
@@ -44,19 +46,55 @@ a {
     font-weight: 200;
     opacity: 0.90;
     letter-spacing: 1px;
-    
+    float: left;
+    padding-top: 4px;
 }
+
 
 a:hover {
     opacity: 0.75;
 }
 
-#logo {
-    padding-right: 1040px;
-    opacity: 0.8;
-   
+
+.heading {
+    width: 250px;
 }
 
+
+#logo {
+    opacity: 0.8;
+    padding-left: 10px;
+}
+
+
+.message {
+    margin: 0 15px;
+    width: 300px;
+    font-size: 20px;
+    color: #fff;
+    font-weight: 300;
+    letter-spacing: 1px;
+}
+
+
+@-webkit-keyframes fadeout {
+    0% {opacity:1;}
+    100% {opacity:0;}
+}
+
+
+@keyframes fadeout {
+    0% {opacity:1;}
+    100% {opacity:0;}
+}
+
+
+.fadeOut {
+  opacity:0;
+  -moz-animation   : fadeout 3s linear;
+  -webkit-animation: fadeout 3s linear;
+  animation-delay  : fadeout 3s linear;
+}
 
 
 header {
@@ -66,25 +104,25 @@ header {
     padding: 20px 60px 0;
     font-size: 20px;
     background: #4ca1af;
-    
 }
-
 
 
 header nav {
     display: flex;
-    /* margin-right: -15px; */
 }
+
 
 header nav li {
     margin: 0 15px;
     color: white;
+    padding-top: 4px;
 }
 
 
-/* TOP HALF */
+/* Jumbotron */
 
-.top {
+
+.jumbotron {
     height: 40vh;
     background: #4ca1af; /* fallback for old browsers */
     background: -webkit-linear-gradient(to bottom, #4ca1af, #c4e0e5); /* Chrome 10-25, Safari 5.1-6 */
@@ -93,6 +131,7 @@ header nav li {
     background-position: center;
     position: relative;
 }
+
 
 .budget {
     position: absolute;
@@ -106,14 +145,15 @@ header nav li {
 }
 
 
-.budget__title {
+.budget_title {
     font-size: 25px;
     text-align: center;
     margin-bottom: 10px;
     font-weight: 300;
 }
 
-.budget__value {
+
+.budget_value {
     font-weight: 300;
     font-size: 46px;
     text-align: center;
@@ -122,13 +162,16 @@ header nav li {
     letter-spacing: 2px;
 }
 
-.budget__income,
-.budget__expenses {
+
+.budget_income,
+.budget_expenses {
     padding: 12px;
     text-transform: uppercase;
 }
 
-.budget__income {
+
+.budget_income,
+.budget_expenses {
     text-align: center;
     width: 400px;
     margin-top: 20px;
@@ -138,18 +181,9 @@ header nav li {
     height: 10px;
 }
 
-.budget__expenses {
-    text-align: center;
-    width: 400px;
-    margin-top: 20px;
-    margin-bottom: 5px;
-    margin-left: 20%;
-    color:  white;
-    height: 10px;
-}
 
-.budget__income--text,
-.budget__expenses--text {
+.budget_income--text,
+.budget_expenses--text {
     float: left;
     font-size: 15px;
     color: white;
@@ -157,14 +191,16 @@ header nav li {
     margin-left: 20px;
 }
 
-.budget__income--value,
-.budget__expenses--value {
+
+.budget_income--value,
+.budget_expenses--value {
     letter-spacing: 1px;
     float: left;
 }
 
-.budget__income--percentage,
-.budget__expenses--percentage {
+
+.budget_income--percentage,
+.budget_expenses--percentage {
     float: left;
     width: 34px;
     font-size: 11px;
@@ -173,22 +209,24 @@ header nav li {
     margin-left: 10px;
 }
 
-.budget__expenses--percentage {
+
+.budget_expenses--percentage {
     background-color: rgba(255, 255, 255, 0.2);
     text-align: center;
     border-radius: 3px;
 }
 
+
 /* Bottom */
 
+
 .bottom {
-    margin-left: 20%;
-    width: 50%;
-    
+    margin: 0 20%; 
 }
 
+
 .receipt_container {
-    margin: 40px;
+    margin: 40px 0;
     float: center;
     width: 800px; 
 }
@@ -199,20 +237,21 @@ header nav li {
     font-weight: 300;
 }
 
+
 .add_receipt {
     margin: 0 auto;
     text-align: center;
     padding: 14px;
     border-bottom: 1px solid #e7e7e7;
     background-color: #f7f7f7;
-
 }
+
 
 .add_type {
     width: 120px;
     border: 1px solid #4ca1af;
     height: 60px;
-    font-size: 18px;
+    font-size: 15px;
     color: inherit;
     background-color: #fff;
     margin-right: 10px;
@@ -224,7 +263,7 @@ header nav li {
     width: 140px;
     border: 1px solid #4ca1af;
     height: 60px;
-    font-size: 18px;
+    font-size: 15px;
     color: inherit;
     background-color: #fff;
     margin-right: 10px;
@@ -232,13 +271,14 @@ header nav li {
     transition: border 0.3s;
 }
 
-.add__description,
-.add__value {
+
+.add_description,
+.add_value {
     border: 1px solid #4ca1af;
     background-color: #fff;
     color: inherit;
     font-family: inherit;
-    font-size: 14px;
+    font-size: 15px;
     height: 60px;
     padding: 12px 15px;
     margin-top: 10px;
@@ -247,16 +287,18 @@ header nav li {
     transition: border 0.3s;
 }
 
+
 .add_type:focus,
 .add_category:focus,
-.add__description:focus,
-.add__value:focus {
+.add_description:focus,
+.add_value:focus {
     outline: none;
     border: 1px solid #4ca1af;
     box-shadow: 0 0 1px #4ca1af;
 }
 
-.add__btn {
+
+.add_btn {
     font-size: 50px;
     background: none;
     border: none;
@@ -269,39 +311,57 @@ header nav li {
     margin-left: 10px;
 }
 
-.add__btn:active { transform: translateY(2px); }
+
+.add_btn:active { transform: translateY(2px); }
+
 
 .item {
     background-color: white;
     padding: 20px;
     border-bottom: 1px solid #e7e7e7;  
-    height: 75px;  
+    height: 75px;
+     
 }
+
+
+.item_new {
+    background-color: white;
+    padding: 20px;
+    border-bottom: 1px solid #e7e7e7;  
+    height: 75px;
+    animation: 1s fadein 0.5s forwards;
+    opacity: 0;  
+}
+
+
+@keyframes fadein {
+    100% {
+        opacity: 1;
+    }
+}
+
 
 .item_category {
     color: #4ca1af;
 }
+
 
 .category_td {
     width: 10%;
     opacity: 0.6;
 }
 
-.exp_description_td {
+
+.description_td {
     width: 30%;
-    
 }
 
-.inc_description_td {
-    width: 30%;
-   
-}
 
 .time_td {
     font-size: 12px;
     width: 30%;
-   
 }
+
 
 .exp_value_td,
 .exp_edit_value_td {
@@ -312,6 +372,7 @@ header nav li {
     transition: transform 0.2s; 
 }
 
+
 .inc_value_td,
 .inc_edit_value_td {
     width: 20%;
@@ -321,46 +382,14 @@ header nav li {
     transition: transform 0.2s;
 }
 
+
 table {
     width: 100%;
 }
 
 
-
-.item__description {
-    float: left;
-}
-
-
-
-/* .exp__icon {
-    float: left;
-    margin-left: 20px;
-    transition: transform 0.3s;
-    font-size: 11px;
-    background-color: #FFDAD9;
-    padding: 3px;
-    border-radius: 3px;
-    width: 32px;
-    text-align: center;
-    color: red;
-}
-
-.inc__icon {
-    float: left;
-    margin-left: 20px;
-    transition: transform 0.3s;
-    font-size: 11px;
-    background-color: #D1F0E8;
-    padding: 3px;
-    border-radius: 3px;
-    width: 32px;
-    text-align: center;
-    color: #4CAF6B;
-} */
-
-.exp__delete--btn,
-.exp__edit--btn {
+.exp_delete--btn,
+.exp_edit--btn {
     font-size: 25px;
     background: none;
     border: none;
@@ -374,8 +403,9 @@ table {
     opacity: 0.8;
 }
 
-.inc__delete--btn,
-.inc__edit--btn {
+
+.inc_delete--btn,
+.inc_edit--btn {
     font-size: 25px;
     background: none;
     border: none;
@@ -391,21 +421,22 @@ table {
 
 
 
-.exp__delete--btn:focus { outline: none; }
-.exp__delete--btn:active { transform: translateY(5px); }
-.exp__edit--btn:focus { outline: none; }
-.exp__edit--btn:active { transform: translateY(5px); }
-
-.inc__delete--btn:focus { outline: none; }
-.inc__delete--btn:active { transform: translateY(5px); }
-.inc__edit--btn:focus { outline: none; }
-.inc__edit--btn:active { transform: translateY(5px); }
+.exp_delete--btn:focus { outline: none; }
+.exp_delete--btn:active { transform: translateY(5px); }
+.exp_edit--btn:focus { outline: none; }
+.exp_edit--btn:active { transform: translateY(5px); }
 
 
-.item:hover .exp__delete--btn  { display: block; }
-.item:hover .exp__edit--btn  { display: block; }
-.item:hover .inc__delete--btn  { display: block; }
-.item:hover .inc__edit--btn  { display: block; }
+.inc_delete--btn:focus { outline: none; }
+.inc_delete--btn:active { transform: translateY(5px); }
+.inc_edit--btn:focus { outline: none; }
+.inc_edit--btn:active { transform: translateY(5px); }
+
+
+.item:hover .exp_delete--btn  { display: block; }
+.item:hover .exp_edit--btn  { display: block; }
+.item:hover .inc_delete--btn  { display: block; }
+.item:hover .inc_edit--btn  { display: block; }
 .item:hover .exp_value_td { transform: translateX(-5px); }
 .item:hover .inc_value_td { transform: translateX(-5px); }
 

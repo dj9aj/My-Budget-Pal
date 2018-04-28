@@ -1,27 +1,29 @@
 const User    = require("../models/user"),
       Receipt = require("../models/receipt");
+
       
 const middleware = {
     
-    isLoggedIn: function (req, res, next) {
+    isLoggedIn: (req, res, next) => {
         if (req.isAuthenticated()) {
             return next();
         }
-        // otherwise disrupt the middleware chain, set the session property of redirectTo equal to the originalUrl from the request
         req.session.redirectTo = req.originalUrl;
-        // and redirect to /login where, once the user logs in, they will be redirected back to the previous page
+        req.flash("error", "You need to be logged in to do that");
         res.redirect("/");
     },
 
-    checkBudgetOwnership: function (req, res, next) {
+    checkBudgetOwnership: (req, res, next) => {
         if (req.isAuthenticated()) {
-            User.findOne({username: req.params.username}, function (err, foundUser) {
+            User.findOne({username: req.params.username}, (err, foundUser) => {
                 if(err) {
+                    req.flash("error", "Budget not found");
                     res.redirect("back");
                 } else {
                     if(foundUser.username === req.user.username) {
                         next();
                     } else {
+                        req.flash("error", "You don't have permission to do that");
                         res.redirect("/budget/" + req.user.username);
                     }
                 }
@@ -31,15 +33,17 @@ const middleware = {
         }
     },
 
-    checkReceiptOwnership: function (req, res, next) {
+    checkReceiptOwnership: (req, res, next) => {
         if (req.isAuthenticated()) {
-            Receipt.findById(req.params.receipt_id, function (err, foundReceipt) {
+            Receipt.findById(req.params.receipt_id, (err, foundReceipt) => {
                 if (err) {
+                    req.flash("error", "Receipt not found");
                     res.redirect("back");
                 } else {
                     if (foundReceipt.author.username === req.user.username) {
                         next();
                     } else {
+                        req.flash("error", "You don't have permission to do that");
                         res.redirect("/budget/" + req.user.username);
                     }
                 }

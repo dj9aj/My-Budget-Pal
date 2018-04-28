@@ -1,52 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>My Budget Pal</title>
-    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,600" rel="stylesheet" type="text/css">
-        <link href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css">
-        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-        <link rel="stylesheet" href="/stylesheets/login.css">
-</head>
-<body>
-    
-    <div class="title">
-        <span><img src="/stylesheets/piggy_bank.png" height="42" width="42"></span>
-        <h1>My Budget Pal</h1>
-    </div>
-
-    
-    
-    <div class="login">
-        <form action="/register" method="POST">
-            <table>
-                <thead>
-                    <th class="login_title">Register</th>
-                    <th class="password_title">Password</th>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><input type="text" class="username" name="username"></td>
-                        <td>
-                            <input type="password" class="password" name="password">
-                            <button class="login_button"><i class="ion-ios-arrow-thin-right"></i></button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            
-        </form>
-        <div class="register_link">
-            <a href="/">Back to Log In</a>  
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>My Budget Pal</title>
+        <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,600" rel="stylesheet" type="text/css">
+            <link href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css">
+            <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+            <link rel="stylesheet" href="/stylesheets/login.css">
+    </head>
+    <body>
+        
+        <div class="title">
+            <span><img src="/stylesheets/piggy_bank.png" height="42" width="42"></span>
+            <h1>My Budget Pal</h1>
         </div>
-    </div>
-    
-    
-    
-    
-</body>
+
+
+        <div class="login">
+            <form action="/register" method="POST">
+                <table>
+                    <thead>
+                        <th class="login_title">Register</th>
+                        <th class="password_title">Password</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><input type="text" class="username" name="username" required></td>
+                            <td>
+                                <input type="password" class="password" name="password" required>
+                                <button class="login_button"><i class="ion-ios-arrow-thin-right"></i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </form>
+            <div class="register_link">
+                <a href="/">Back to Log In</a>  
+            </div>
+        </div>
+        
+        
+    </body>
 </html>
 
 
