@@ -6,7 +6,8 @@ const express     = require("express"),
       budgetCtrl  = require("../lib/budgetCtrl"),
       middleware  = require("../middleware/index");  
 
-
+      
+// Display budget of logged in user
 router.get("/budget/:username", middleware.isLoggedIn, middleware.checkBudgetOwnership, (req, res, next) => {
     User.findOne({username: req.params.username}, function (err, foundUser) {
         if(err) {

@@ -8,13 +8,13 @@ const express       = require("express"),
 
 
 // Create a new receipt   
-router.post("/budget/:username", function (req, res, next) {
+router.post("/budget/:username", (req, res, next) => {
     const author = {
         id: req.user._id,
         username: req.user.username
     }
     const newReceipt = {receipt_type: req.body.type, category: req.body.category, description: req.body.description, value: req.body.value, author: author};
-    Receipt.create(newReceipt, function(err, newlyCreated) {
+    Receipt.create(newReceipt, (err, newlyCreated) => {
         if (err) {
             console.log(err);
         } else {
@@ -25,9 +25,10 @@ router.post("/budget/:username", function (req, res, next) {
     });
 });
 
-// Render Receipt edit page
-router.get("/budget/:username/:receipt_id/edit", middleware.checkReceiptOwnership, function (req, res, next) {
-    Receipt.findById(req.params.receipt_id, function (err, foundReceipt) {
+
+// Receipt edit page
+router.get("/budget/:username/:receipt_id/edit", middleware.checkReceiptOwnership, (req, res, next) => {
+    Receipt.findById(req.params.receipt_id, (err, foundReceipt) => {
         if (err) {
             console.log(err);
             res.redirect("/budget/" + req.params.username);
@@ -39,10 +40,11 @@ router.get("/budget/:username/:receipt_id/edit", middleware.checkReceiptOwnershi
     });
 });
 
-// Receipt update
-router.put("/budget/:username/:receipt_id", function (req, res, next) {
+
+// Receipt update route
+router.put("/budget/:username/:receipt_id", (req, res, next) => {
     var receipt = {receipt_type: req.body.type, category: req.body.category, description: req.body.description, value: req.body.value};
-    Receipt.findByIdAndUpdate(req.params.receipt_id, receipt, {upsert: true, new: true}, function (err, updatedReceipt) {
+    Receipt.findByIdAndUpdate(req.params.receipt_id, receipt, {upsert: true, new: true}, (err, updatedReceipt) => {
         if (err) {
             req.flash("error", err.message);
             res.redirect("back");
@@ -53,9 +55,10 @@ router.put("/budget/:username/:receipt_id", function (req, res, next) {
     });
 });
 
+
 // Receipt destroy route
-router.delete("/budget/:username/:receipt_id", function (req, res, next) {
-    Receipt.findByIdAndRemove(req.params.receipt_id, function (err) {
+router.delete("/budget/:username/:receipt_id", (req, res, next) => {
+    Receipt.findByIdAndRemove(req.params.receipt_id, (err) => {
         if (err) {
             res.redirect("back");
         } else {
@@ -64,5 +67,6 @@ router.delete("/budget/:username/:receipt_id", function (req, res, next) {
         }
     });
 });
+
 
 module.exports = router;
