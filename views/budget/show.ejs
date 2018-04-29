@@ -62,7 +62,7 @@
                 </select>
                 <input type="text" class="add_description" name="description" placeholder="Description" required>
                 <input type="number" class="add_value" name="value" placeholder="Value" min="0.01" step="0.01" required>
-                <button class="add_btn"><i class="ion-ios-plus-outline"></i></button>  
+                <button class="add_btn"><i class="ion-ios7-plus-outline"></i></button>  
             </form>
         </div>  
                     
@@ -84,7 +84,7 @@
                                 </td>
                                 <td class="delete_td">
                                     <form action="/budget/<%=currentUser.username%>/<%=receipts[i]._id%>?_method=DELETE" method="POST">
-                                        <button class="exp_delete--btn"><i class="ion-ios-trash-outline"></i></button>
+                                        <button class="exp_delete--btn"><i class="ion-ios7-trash-outline"></i></button>
                                     </form>
                                 </td>
                             <% } else { %>  
@@ -96,7 +96,7 @@
                                 </td>
                                 <td class="delete_td">
                                     <form action="/budget/<%=currentUser.username%>/<%=receipts[i]._id%>?_method=DELETE" method="POST">
-                                        <button class="inc_delete--btn"><i class="ion-ios-trash-outline"></i></button>
+                                        <button class="inc_delete--btn"><i class="ion-ios7-trash-outline"></i></button>
                                     </form>
                                 </td>
                             <% } %> 
