@@ -24,7 +24,7 @@ router.get("/budget/:username", middleware.isLoggedIn, middleware.checkBudgetOwn
             expPercentage = budgetCtrl.calculatePercentage(budgetTotals.totalInc, budgetTotals.totalExp);
             icons = budgetCtrl.displayCategory();
             
-            res.render("budget/show", {user: foundUser, receipts: receipts, budgetTotals: budgetTotals, expPercentage: expPercentage, icons: icons});
+            res.render("budget/flexShow", {user: foundUser, receipts: receipts, budgetTotals: budgetTotals, expPercentage: expPercentage, icons: icons});
         }); 
     });
 });
