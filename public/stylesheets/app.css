@@ -412,9 +412,6 @@ hr {
         font-size: 18px;
     }
 
-    .budget {
-        margin-top: 50px;
-    }
 
     .budget_value {
         font-size: 70px;
@@ -429,7 +426,7 @@ hr {
     }
 
     .budget_income {
-        margin-top: 100px;
+        margin-top: 60px;
     }
 
     .budget_income_text,
@@ -445,8 +442,12 @@ hr {
         margin-top: 20px;
     }
 
+    .budget_income_value {
+        margin-bottom: 20px;
+    }
+
     .budget_expenses_percentage {
-       margin: 20px;
+       margin: 10px;
     }
 
     .add_description, 
