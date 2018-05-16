@@ -1,111 +1,102 @@
 <% include ../partials/header %>
 
-<div class="jumbotron">
+<section class="jumbotron">
+    
     <div class="budget">
         <div class="budget_title">
-            Hello <%= user.username %>,  available budget on <%= moment().format("Do MMM YYYY"); %>:
+            <span id="username">Hello <%= user.username %>,</span> 
+            <span> available budget on <%= moment().format("Do MMM YYYY"); %>:</span>
         </div>
 
         <div class="budget_value">£<%=budgetTotals.totalBudget.toLocaleString("en-IN", {minimumFractionDigits: 2, maximumFractionDigits: 2});%></div>
 
-        <div class="budget_income clearfix">
-            <div class="budget_income--text">Income</div>
-            <div class="right">
-                <div class="budget_income--value">+ £<%=budgetTotals.totalInc.toLocaleString("en-IN", {minimumFractionDigits: 2, maximumFractionDigits: 2});%></div>
-                <div class="budget_income--percentage">&nbsp;</div>
-            </div>
+        <div class="budget_income">
+            <div class="budget_income_text">Income</div>
+            <div class="budget_income_value">+ £<%=budgetTotals.totalInc.toLocaleString("en-IN", {minimumFractionDigits: 2, maximumFractionDigits: 2});%></div>
+            <div class="budget_income_percentage">&nbsp;</div>
         </div>
 
-        <div class="budget_expenses clearfix">
-            <div class="budget_expenses--text">Expenses</div>
-            <div class="right clearfix">
-                <div class="budget_expenses--value">- £<%=budgetTotals.totalExp.toLocaleString("en-IN", {minimumFractionDigits: 2, maximumFractionDigits: 2});%></div>
-                <div class="budget_expenses--percentage"><%=expPercentage %>%</div>
-            </div>
-        </div>   
+        <div class="budget_expenses">
+            <div class="budget_expenses_text">Expenses</div>
+            <div class="budget_expenses_value">- £<%=budgetTotals.totalExp.toLocaleString("en-IN", {minimumFractionDigits: 2, maximumFractionDigits: 2});%></div>
+            <div class="budget_expenses_percentage"><%=expPercentage %>%</div>
+        </div> 
     </div>
-</div>
+
+</section>
 
 
-<div class="bottom">
-    <div class="receipt_container clearfix">
-        <div class="add_receipt">
-            <span class="receipt_title">Add Receipt</span>
-            <hr>
-            <form action="/budget/<%= currentUser.username %>" method="POST">
-                <select class="add_type" name="type" required>
-                    <option value="" selected disabled hidden>Type</option>
-                    <option value="inc">Income</option>
-                    <option value="exp">Expense</option>
-                </select>
-                <select class="add_category" name="category" required>
-                    <option value="" selected disabled hidden>Category</option>
-                    <optgroup label="Expenses">
-                        <option value="transport">Transport</option>
-                        <option value="groceries">Groceries</option>
-                        <option value="eating_out">Eating Out</option>
-                        <option value="bills">Bills</option>
-                        <option value="entertainment">Entertainment</option>
-                        <option value="holidays">Holidays</option>
-                        <option value="shopping">Shopping</option>
-                        <option value="savings">Savings</option>
-                        <option value="expenses">Expenses</option>
-                        <option value="general">General</option>
-                    </optgroup>
-                    <optgroup label="Income">
-                        <option value="wages">Wages</option>
-                        <option value="refund">Refund</option>
-                        <option value="cashback">Cash Back</option>
-                        <option value="gift">Gift</option>
-                        <option value="general">General</option>
-                    </optgroup>
-                </select>
-                <input type="text" class="add_description" name="description" placeholder="Description" required>
-                <input type="number" class="add_value" name="value" placeholder="Value" min="0.01" step="0.01" required>
-                <button class="add_btn"><i class="ion-ios-plus-outline"></i></button>  
-            </form>
-        </div>  
-                    
-        
-        <% for (var i = receipts.length - 1; i >= 0; i--) { %>
-            <div class="item clearfix">
-                <table>
-                    <tbody>
-                        <tr>
-                            <td class="category_td"><img src="/media/<%= icons[receipts[i].category] %>" height="42" width="42"</td>
-                            <td class="description_td"><%= receipts[i].description %></td>
-                            <td class="time_td"><i><%= moment(receipts[i].createdAt).format("Do MMM YYYY, h:mm a") %></i></td>
-                            <% if (receipts[i].receipt_type == "exp") { %>
-                                <td class="exp_value_td">- £ <%= receipts[i].value.toLocaleString("en-IN", {minimumFractionDigits: 2, maximumFractionDigits: 2}); %></td>
-                                <td>
-                                    <form action="/budget/<%=user.username%>/<%=receipts[i]._id%>/edit" method="GET">
-                                        <button class="exp_edit--btn"><i class="ion-edit"></i></button>
-                                    </form>
-                                </td>
-                                <td class="delete_td">
-                                    <form action="/budget/<%=currentUser.username%>/<%=receipts[i]._id%>?_method=DELETE" method="POST">
-                                        <button class="exp_delete--btn"><i class="ion-ios-trash-outline"></i></button>
-                                    </form>
-                                </td>
-                            <% } else { %>  
-                                <td class="inc_value_td">+ £<%= receipts[i].value.toLocaleString("en-IN", {minimumFractionDigits: 2, maximumFractionDigits: 2}); %></td>
-                                <td>
-                                    <form action="/budget/<%=user.username%>/<%=receipts[i]._id%>/edit" method="GET">
-                                        <button class="inc_edit--btn"><i class="ion-edit"></i></button>
-                                    </form>
-                                </td>
-                                <td class="delete_td">
-                                    <form action="/budget/<%=currentUser.username%>/<%=receipts[i]._id%>?_method=DELETE" method="POST">
-                                        <button class="inc_delete--btn"><i class="ion-ios-trash-outline"></i></button>
-                                    </form>
-                                </td>
-                            <% } %> 
-                        </tr>
-                    </tbody>
-                </table>    
-            </div>
-        <% } %>
-    </div>
-</div>
+<main>
+
+    <section class="add_receipt">
+        <span class="receipt_title">Add Receipt</span>
+        <hr>
+        <form action="/budget/<%= currentUser.username %>" method="POST">
+            <select class="add_type" name="type" required>
+                <option value="" selected disabled hidden>Type</option>
+                <option value="inc">Income</option>
+                <option value="exp">Expense</option>
+            </select>
+            <select class="add_category" name="category" required>
+                <option value="" selected disabled hidden>Category</option>
+                <optgroup label="Expenses">
+                    <option value="transport">Transport</option>
+                    <option value="groceries">Groceries</option>
+                    <option value="eating_out">Eating Out</option>
+                    <option value="bills">Bills</option>
+                    <option value="entertainment">Entertainment</option>
+                    <option value="holidays">Holidays</option>
+                    <option value="shopping">Shopping</option>
+                    <option value="savings">Savings</option>
+                    <option value="expenses">Expenses</option>
+                    <option value="general">General</option>
+                </optgroup>
+                <optgroup label="Income">
+                    <option value="wages">Wages</option>
+                    <option value="refund">Refund</option>
+                    <option value="cashback">Cash Back</option>
+                    <option value="gift">Gift</option>
+                    <option value="general">General</option>
+                </optgroup>
+            </select>
+            <input type="text" class="add_description" name="description" placeholder="Description" required>
+            <input type="number" class="add_value" name="value" placeholder="Value" min="0.01" step="0.01" required>
+            <button class="add_btn"><i class="ion-ios-plus-outline"></i></button>  
+        </form>
+    </section>  
+                
+    <% for (var i = receipts.length - 1; i >= 0; i--) { %>
+        <section class="receipt">
+            <div class="receipt_category"><img src="/media/<%= icons[receipts[i].category] %>" height="42" width="42"></div>
+            <div class="receipt_description"><%= receipts[i].description %></div>
+            <div class="receipt_time"><i><%= moment(receipts[i].createdAt).format("Do MMM YYYY, h:mm a") %></i></div>
+            <% if (receipts[i].receipt_type == "exp") { %>
+                <div class="exp_receipt_value">- £ <%= receipts[i].value.toLocaleString("en-IN", {minimumFractionDigits: 2, maximumFractionDigits: 2}); %></div>
+                <div>
+                    <form action="/budget/<%=user.username%>/<%=receipts[i]._id%>/edit" method="GET">
+                        <button class="exp_edit_btn"><i class="ion-edit"></i></button>
+                    </form>
+                </div>
+                <div class="exp_receipt_delete">
+                    <form action="/budget/<%=currentUser.username%>/<%=receipts[i]._id%>?_method=DELETE" method="POST">
+                        <button class="exp_delete_btn"><i class="ion-ios-trash-outline"></i></button>
+                    </form>
+                </div>
+            <% } else { %>  
+                <div class="inc_receipt_value">+ £<%= receipts[i].value.toLocaleString("en-IN", {minimumFractionDigits: 2, maximumFractionDigits: 2}); %></div>
+                <div>
+                    <form action="/budget/<%=user.username%>/<%=receipts[i]._id%>/edit" method="GET">
+                        <button class="inc_edit_btn"><i class="ion-edit"></i></button>
+                    </form>
+                </div>
+                <div class="inc_receipt_delete">
+                    <form action="/budget/<%=currentUser.username%>/<%=receipts[i]._id%>?_method=DELETE" method="POST">
+                        <button class="inc_delete_btn"><i class="ion-ios-trash-outline"></i></button>
+                    </form>
+                </div>
+            <% } %>    
+        </section>
+    <% } %> 
+</main>
 
 <% include ../partials/footer %>

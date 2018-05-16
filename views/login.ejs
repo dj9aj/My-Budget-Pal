@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+    
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,45 +10,37 @@
         <link rel="stylesheet" href="/stylesheets/ionicons.css">
         <link rel="stylesheet" href="/stylesheets/login.css">
     </head>
+    
     <body>
     
-        <div class="title">
+        <section class="title">
             <span><img id="logo" src="/media/piggy_bank.png" height="42" width="42"></span>
             <h1>My Budget Pal</h1>
-        </div>
+        </section>
         
-        <div class="login">
+        <section class="login">
             <form class="login_form" action="/login" method="POST">
-                <table>
-                    <thead>
-                        <th class="login_title">Log In</th>
-                        <th class="password_title">Password</th>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><input type="text" class="username" name="username" required></td>
-                            <td>
-                                <input type="password" class="password" name="password" required>
-                                <button class="login_button"><i class="ion-ios-arrow-thin-right"></i></button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="login_title">Log In</div>
+                <div class="password_title">Password</div>
+                <input type="text" class="username" name="username" required>
+                <input type="password" class="password" name="password" required>
+                <button class="login_button"><i class="ion-ios-arrow-thin-right"></i></button>
+                <div class="register_link">
+                    <a href="/register">Create a new account</a>  
+                </div>
+                <div class="message fadeOut">
+                    <% if (error.length > 0) { %>
+                        <div><%= error %></div>
+                    <% } %>
+                    <% if (success.length > 0){ %>   
+                        <div><%= success %></div> 
+                    <% } %>    
+                </div>
             </form>
-            <div class="register_link">
-                <a href="/register">Create a new account</a>  
-            </div>
-            <div class="message fadeOut">
-                <% if (error.length > 0) { %>
-                    <div><%= error %></div>
-                <% } %>
-                <% if (success.length > 0){ %>   
-                    <div><%= success %></div> 
-                <% } %>    
-            </div>
-        </div>
+        </section>
             
     </body>
+
 </html>
 
 

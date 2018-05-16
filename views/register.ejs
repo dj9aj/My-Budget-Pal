@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+    
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,40 +10,37 @@
         <link rel="stylesheet" href="/stylesheets/ionicons.css">
         <link rel="stylesheet" href="/stylesheets/login.css">
     </head>
+    
     <body>
-        
-        <div class="title">
+    
+        <section class="title">
             <span><img id="logo" src="/media/piggy_bank.png" height="42" width="42"></span>
             <h1>My Budget Pal</h1>
-        </div>
-
-
-        <div class="login">
-            <form action="/register" method="POST">
-                <table>
-                    <thead>
-                        <th class="login_title">Register</th>
-                        <th class="password_title">Password</th>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><input type="text" class="username" name="username" required></td>
-                            <td>
-                                <input type="password" class="password" name="password" required>
-                                <button class="login_button"><i class="ion-ios-arrow-thin-right"></i></button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+        </section>
+        
+        <section class="login">
+            <form class="login_form" action="/register" method="POST">
+                <div class="login_title">Register</div>
+                <div class="password_title">Password</div>
+                <input type="text" class="username" name="username" required>
+                <input type="password" class="password" name="password" required>
+                <button class="login_button"><i class="ion-ios-arrow-thin-right"></i></button>
+                <div class="register_link">
+                    <a href="/">Back To Log In</a>  
+                </div>
+                <div class="message fadeOut">
+                    <% if (error.length > 0) { %>
+                        <div><%= error %></div>
+                    <% } %>
+                    <% if (success.length > 0){ %>   
+                        <div><%= success %></div> 
+                    <% } %>    
+                </div>
             </form>
-            <div class="register_link">
-                <a href="/">Back to Log In</a>  
-            </div>
-        </div>
-        
-        
+        </section>
+    
     </body>
-</html>
 
+    </html>
 
 

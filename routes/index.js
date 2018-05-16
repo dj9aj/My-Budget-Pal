@@ -36,8 +36,7 @@ router.post("/register", (req, res, next) => {
     const newUser = new User({username: req.body.username}); 
     User.register(newUser, req.body.password, (err, user) => {
         if(err) {
-            console.log(err);
-            return res.render("register");
+            return res.render("register", {error: err.message}); 
         }
         passport.authenticate("local")(req, res, () => {
             res.redirect("/budget/" + user.username);

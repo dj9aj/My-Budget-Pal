@@ -1,133 +1,125 @@
 <% include ../partials/header %>
 
-<div class="jumbotron">
+<section class="jumbotron">
     <div class="budget">
         <div class="budget_title">
             Edit Receipt - "<%= receipt.description %>"
         </div>
     </div> 
-</div>
+</section>
 
-<div class="bottom">
-    <div class="receipt_container clearfix">
-        <div class="add_receipt">
-            <form action="/budget/<%=currentUser.username%>/<%=receipt._id%>?_method=PUT" method="POST">
-                <select class="add_type" name="type" required>
-                    <% if (receipt.receipt_type === "exp") { %>
-                        <option value="inc">Income</option>
-                        <option value="exp" selected>Expense</option>
-                   <% } else { %>
-                        <option value="inc" selected>Income</option>
-                        <option value="exp">Expense</option>
+<main>
+    
+    <section class="add_receipt">
+        <form action="/budget/<%=currentUser.username%>/<%=receipt._id%>?_method=PUT" method="POST">
+            <select class="add_type" name="type" required>
+                <% if (receipt.receipt_type === "exp") { %>
+                    <option value="inc">Income</option>
+                    <option value="exp" selected>Expense</option>
+                <% } else { %>
+                    <option value="inc" selected>Income</option>
+                    <option value="exp">Expense</option>
+                <% } %>
+            </select>
+            <select class="add_category" name="category" required>
+                <optgroup label="Expenses">
+                    <% if (receipt.category === "transport") { %>
+                        <option value="transport" selected>Transport</option>
+                    <% } else { %>
+                        <option value="transport">Transport</option>
                     <% } %>
-                </select>
-                <select class="add_category" name="category" required>
-                    <optgroup label="Expenses">
-                        <% if (receipt.category === "transport") { %>
-                            <option value="transport" selected>Transport</option>
-                        <% } else { %>
-                            <option value="transport">Transport</option>
-                        <% } %>
-                        <% if (receipt.category === "groceries") { %>
-                            <option value="groceries" selected>Groceries</option>
-                        <% } else { %>
-                            <option value="groceries">Groceries</option>
-                        <% } %>
-                        <% if (receipt.category === "eating_out") { %>
-                            <option value="eating_out" selected>Eating Out</option>
-                        <% } else { %>
-                            <option value="eating_out">Eating Out</option>
-                        <% } %>
-                        <% if (receipt.category === "bills") { %>
-                            <option value="bills" selected>Bills</option>
-                        <% } else { %>
-                            <option value="bills">Bills</option>
-                        <% } %>
-                        <% if (receipt.category === "entertainment") { %>
-                            <option value="entertainment" selected>Entertainment</option>
-                        <% } else { %>
-                            <option value="entertainment">Entertainment</option>
-                        <% } %>
-                        <% if (receipt.category === "holidays") { %>
-                            <option value="holidays" selected>Holidays</option>
-                        <% } else { %>
-                            <option value="holidays">Holidays</option>
-                        <% } %>
-                        <% if (receipt.category === "shopping") { %>
-                            <option value="shopping" selected>Shopping</option>
-                        <% } else { %>
-                            <option value="shopping">Shopping</option>
-                        <% } %>
-                        <% if (receipt.category === "savings") { %>
-                            <option value="savings" selected>Savings</option>
-                        <% } else { %>
-                            <option value="savings">Savings</option>
-                        <% } %>
-                        <% if (receipt.category === "expenses") { %>
-                            <option value="expenses" selected>Expenses</option>
-                        <% } else { %>
-                            <option value="expenses">Expenses</option>
-                        <% } %>
-                        <% if (receipt.category === "general") { %>
-                            <option value="general" selected>General</option>
-                        <% } else { %>
-                            <option value="general">General</option>
-                        <% } %>
-                    </optgroup>
-                    <optgroup label="Income">
-                        <% if (receipt.category === "wages") { %>
-                            <option value="wages" selected>Wages</option>
-                        <% } else { %>
-                            <option value="wages">Wages</option>
-                        <% } %>
-                        <% if (receipt.category === "refund") { %>
-                            <option value="refund" selected>Refund</option>
-                        <% } else { %>
-                            <option value="refund">Refund</option>
-                        <% } %>
-                        <% if (receipt.category === "cashback") { %>
-                            <option value="cashback" selected>Cash Back</option>
-                        <% } else { %>
-                            <option value="cashback">Cash Back</option>
-                        <% } %>
-                        <% if (receipt.category === "gift") { %>
-                            <option value="gift" selected>Gift</option>
-                        <% } else { %>
-                            <option value="gift">Gift</option>
-                        <% } %>  
-                        <% if (receipt.category === "general") { %>
-                            <option value="general" selected>General</option>
-                        <% } else { %> 
-                            <option value="general">General</option>
-                        <% } %> 
-                    </optgroup>
-                </select>
-                <input type="text" class="add_description" name="description" value="<%= receipt.description %>" required>
-                <input type="number" class="add_value" name="value" value="<%= receipt.value %>" min="0.01" step="0.01" required>
-                <button class="add_btn"><i class="ion-ios-plus-outline"></i></button>  
-            </form>
-        </div>  
-                    
-        <div class="receipts__list">
-            <div class="item clearfix">
-                <table>
-                    <tbody>
-                        <tr>
-                            <td class="category_td"><img src="/media/<%= icons[receipt.category] %>" height="42" width="42"</td>
-                            <td class="description_td"><%= receipt.description %></td>
-                            <td class="time_td"><i><%= moment(receipt.createdAt).fromNow() %></i></td>
-                            <% if (receipt.receipt_type === "exp") { %>
-                            <td class="exp_edit_value_td">- £ <%= receipt.value.toLocaleString("en-IN", {minimumFractionDigits: 2, maximumFractionDigits: 2}); %></td>   
-                            <% } else { %>
-                            <td class="inc_edit_value_td">+ £<%= receipt.value.toLocaleString("en-IN", {minimumFractionDigits: 2, maximumFractionDigits: 2}); %></td>
-                            <% } %>
-                        </tr>
-                    </tbody>
-                </table>    
-            </div>
-        </div>      
-    </div>
-</div>
+                    <% if (receipt.category === "groceries") { %>
+                        <option value="groceries" selected>Groceries</option>
+                    <% } else { %>
+                        <option value="groceries">Groceries</option>
+                    <% } %>
+                    <% if (receipt.category === "eating_out") { %>
+                        <option value="eating_out" selected>Eating Out</option>
+                    <% } else { %>
+                        <option value="eating_out">Eating Out</option>
+                    <% } %>
+                    <% if (receipt.category === "bills") { %>
+                        <option value="bills" selected>Bills</option>
+                    <% } else { %>
+                        <option value="bills">Bills</option>
+                    <% } %>
+                    <% if (receipt.category === "entertainment") { %>
+                        <option value="entertainment" selected>Entertainment</option>
+                    <% } else { %>
+                        <option value="entertainment">Entertainment</option>
+                    <% } %>
+                    <% if (receipt.category === "holidays") { %>
+                        <option value="holidays" selected>Holidays</option>
+                    <% } else { %>
+                        <option value="holidays">Holidays</option>
+                    <% } %>
+                    <% if (receipt.category === "shopping") { %>
+                        <option value="shopping" selected>Shopping</option>
+                    <% } else { %>
+                        <option value="shopping">Shopping</option>
+                    <% } %>
+                    <% if (receipt.category === "savings") { %>
+                        <option value="savings" selected>Savings</option>
+                    <% } else { %>
+                        <option value="savings">Savings</option>
+                    <% } %>
+                    <% if (receipt.category === "expenses") { %>
+                        <option value="expenses" selected>Expenses</option>
+                    <% } else { %>
+                        <option value="expenses">Expenses</option>
+                    <% } %>
+                    <% if (receipt.category === "general") { %>
+                        <option value="general" selected>General</option>
+                    <% } else { %>
+                        <option value="general">General</option>
+                    <% } %>
+                </optgroup>
+                <optgroup label="Income">
+                    <% if (receipt.category === "wages") { %>
+                        <option value="wages" selected>Wages</option>
+                    <% } else { %>
+                        <option value="wages">Wages</option>
+                    <% } %>
+                    <% if (receipt.category === "refund") { %>
+                        <option value="refund" selected>Refund</option>
+                    <% } else { %>
+                        <option value="refund">Refund</option>
+                    <% } %>
+                    <% if (receipt.category === "cashback") { %>
+                        <option value="cashback" selected>Cash Back</option>
+                    <% } else { %>
+                        <option value="cashback">Cash Back</option>
+                    <% } %>
+                    <% if (receipt.category === "gift") { %>
+                        <option value="gift" selected>Gift</option>
+                    <% } else { %>
+                        <option value="gift">Gift</option>
+                    <% } %>  
+                    <% if (receipt.category === "general") { %>
+                        <option value="general" selected>General</option>
+                    <% } else { %> 
+                        <option value="general">General</option>
+                    <% } %> 
+                </optgroup>
+            </select>
+            <input type="text" class="add_description" name="description" value="<%= receipt.description %>" required>
+            <input type="number" class="add_value" name="value" value="<%= receipt.value %>" min="0.01" step="0.01" required>
+            <button class="add_btn"><i class="ion-ios-plus-outline"></i></button>  
+        </form>
+    </section>  
+                
+    <section class="receipt">
+        <div class="receipt_category"><img src="/media/<%= icons[receipt.category] %>" height="42" width="42"></div>
+        <div class="receipt_description"><%= receipt.description %></div>
+        <div class="receipt_time"><i><%= moment(receipt.createdAt).fromNow() %></i></div>
+        <% if (receipt.receipt_type === "exp") { %>
+        <div class="exp_edit_value">- £ <%= receipt.value.toLocaleString("en-IN", {minimumFractionDigits: 2, maximumFractionDigits: 2}); %></div>   
+        <% } else { %>
+        <div class="inc_edit_value">+ £<%= receipt.value.toLocaleString("en-IN", {minimumFractionDigits: 2, maximumFractionDigits: 2}); %></div>
+        <% } %>
+    </section>
+
+</main>
     
 
 <% include ../partials/footer %>
