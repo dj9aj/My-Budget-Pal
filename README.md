@@ -9,6 +9,7 @@ https://mysterious-lowlands-58174.herokuapp.com/
 I have created an account with some seed data for testing purposes. Feel free to log in with these details - 
 
 username: j
+
 password: password
 
 
